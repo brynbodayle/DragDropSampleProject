@@ -80,10 +80,14 @@ NSString *const DragDropCollectionViewCellIdentifier = @"DragDropCollectionViewC
         
         OBDragDropManager *dragDropManager = [OBDragDropManager sharedManager];
         
-        UILongPressGestureRecognizer *dragDropRecognizer = [dragDropManager createLongPressDragDropGestureRecognizerWithSource:self];
-        dragDropRecognizer.minimumPressDuration = MINIMUM_PRESS_DURATION;
-        [cell addGestureRecognizer:dragDropRecognizer];
-        cell.dragDropGestureRecognizer = dragDropRecognizer;
+        if(!cell.dragDropGestureRecognizer) {
+            
+            UILongPressGestureRecognizer *dragDropRecognizer = [dragDropManager createLongPressDragDropGestureRecognizerWithSource:self];
+            dragDropRecognizer.minimumPressDuration = MINIMUM_PRESS_DURATION;
+            [cell addGestureRecognizer:dragDropRecognizer];
+            cell.dragDropGestureRecognizer = dragDropRecognizer;
+        }
+        
         cell.dropZoneHandler = nil;
     }
     else {
